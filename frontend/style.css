@@ -1,0 +1,19 @@
+body {
+    font-family: Arial, sans-serif;
+    max-width: 800px;
+    margin: 20px auto;
+}
+input {
+    padding: 5px;
+    margin: 5px;
+}
+button {
+    padding: 5px 10px;
+}
+.movie {
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+}
+a {
+    color: #0066cc;
+}

@@ -1,0 +1,38 @@
+# Python通用
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+*.egg-info/
+dist/
+build/
+*.egg
+*.log
+scrapy.cfg
+*.sqlite
+*.db
+
+# MongoDB相关
+mongod.lock
+*.mongo
+
+# FastAPI/开发环境
+*.swp
+*.swo
+*.swn
+.vscode/
+.idea/
+*.DS_Store
+
+# 其他临时文件
+output.json
+*.bak
+*.tmp
+
+# 不小心生成的敏感文件
+*.env
+secrets/
+credentials/
