@@ -59,10 +59,12 @@ def scrape_douban_movie(movie_name):
     rating = detail_soup.select_one(".rating_num").text.strip() or "N/A"
     director = detail_soup.select_one(".attrs a").text.strip() if detail_soup.select_one(".attrs a") else "Unknown"
     # 修复演员选择器
-    actors = [a.text.strip() for a in detail_soup.select("#info span.actor .attrs a")[:3]] or ["Unknown"]
+    actors_section = detail_soup.select_one("#info > span:nth-child(5) > span.attrs")
+    actors = [a.text.strip() for a in actors_section.select("a")][:3] if actors_section else ["Unknown"]
     comments = [c.text.strip() for c in detail_soup.select(".comment-item .comment p span.short")[:5]] or ["No comments"]
     
     print(f"Scraped Title: {title}")
+    print(f"Scraped Actors: {actors}")
     return {
         "title": title,
         "url": movie_url,
