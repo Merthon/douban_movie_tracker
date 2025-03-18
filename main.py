@@ -46,4 +46,7 @@ async def create_movie(movie: MovieRequest):
 # 获取所有电影
 @app.get("/movies/", response_model=list[MovieResponse])
 async def get_movies():
-    return get_all_movies()
+    movies = get_all_movies()
+    if not movies:
+        raise HTTPException(status_code=404, detail="No movies found")
+    return movies

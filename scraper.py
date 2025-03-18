@@ -29,32 +29,25 @@ def scrape_douban_movie(movie_name):
             EC.presence_of_element_located((By.CLASS_NAME, "item-root"))
         )
     except:
-        print("Timeout waiting for search results.")
         driver.quit()
         return None
     
-    print(f"Page Title: {driver.title}")
     soup = BeautifulSoup(driver.page_source, "html.parser")
     movie_link = soup.select_one(".item-root a[href^='https://movie.douban.com/subject/']")
     if not movie_link:
-        print("No movie link found.")
         driver.quit()
         return None
     
     movie_url = movie_link["href"]
-    print(f"Detail URL: {movie_url}")
     driver.quit()
     
     # 爬详情页
     time.sleep(2)
     detail_response = requests.get(movie_url, headers=HEADERS)
-    print(f"Detail Status Code: {detail_response.status_code}")
     if detail_response.status_code != 200:
-        print(f"Detail Response: {detail_response.text[:500]}")
         return None
     
     detail_soup = BeautifulSoup(detail_response.text, "html.parser")
-    
     title = detail_soup.select_one("h1 span").text.strip()
     rating = detail_soup.select_one(".rating_num").text.strip() or "N/A"
     director = detail_soup.select_one(".attrs a").text.strip() if detail_soup.select_one(".attrs a") else "Unknown"
@@ -63,8 +56,6 @@ def scrape_douban_movie(movie_name):
     actors = [a.text.strip() for a in actors_section.select("a")][:3] if actors_section else ["Unknown"]
     comments = [c.text.strip() for c in detail_soup.select(".comment-item .comment p span.short")[:5]] or ["No comments"]
     
-    print(f"Scraped Title: {title}")
-    print(f"Scraped Actors: {actors}")
     return {
         "title": title,
         "url": movie_url,
@@ -74,7 +65,3 @@ def scrape_douban_movie(movie_name):
         "comments": comments,
         "scraped_at": time.ctime()
     }
-
-if __name__ == "__main__":
-    data = scrape_douban_movie("肖申克的救赎")
-    print(f"Final Result: {data}")
