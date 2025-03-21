@@ -7,11 +7,15 @@
 </head>
 <body>
     <h1>电影追踪器❤️</h1>
+    <button onclick="logout()">注销</button>
     <div>
-        <input id="movie-name" type="text" placeholder="请输入电影名字">
+        <input id="movie-name" type="text" placeholder="Enter movie name">
         <button onclick="addMovie()">添加电影</button>
     </div>
+    <h2>所有电影</h2>
     <div id="movie-list"></div>
+    <h2>搜索历史</h2>
+    <div id="history-list"></div>
     <script src="script.js"></script>
 </body>
 </html>

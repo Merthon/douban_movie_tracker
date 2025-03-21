@@ -36,3 +36,5 @@ output.json
 *.env
 secrets/
 credentials/
+
+secrets_test.py

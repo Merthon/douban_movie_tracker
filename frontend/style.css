@@ -9,6 +9,7 @@ input {
 }
 button {
     padding: 5px 10px;
+    margin: 5px;
 }
 .movie {
     border-bottom: 1px solid #ddd;
@@ -16,4 +17,7 @@ button {
 }
 a {
     color: #0066cc;
+}
+ul {
+    margin: 5px 0;
 }
